@@ -7,29 +7,50 @@ function App() {
   const [candidates, setCandidates] = useState([]);
   const [randomCandidate, setRandomCandidate] = useState('');
   const [showPairs, setShowPairs] = useState(false);
+  const [inputField, setInputField] = useState('');
 
   const submitHandler = (event) => {
+    event.persist();
     if(event.key === "Enter"){
       setCandidates(candidates => [...candidates, event.target.value]);
+      setInputField('')
     }
   }
 
-  const randomizePairsHandler = (candidates) => {
+  const randomizeCandidateHandler = (candidates) => {
     setRandomCandidate(candidates[Math.floor(Math.random()*candidates.length)]);
+  }
+
+  const changeHandler = (event) => {
+    event.persist();
+    setInputField(event.target.value);
   }
 
   useEffect(() => {
       setCandidates(candidates);
-  }, [candidates, randomCandidate]);
+      console.log(inputField)
+  }, [candidates, inputField]);
 
 
   return (
     <Container>
       <div className="App">
         <h1>Random Pair</h1>
-        <TextField id="name-textfield" label="Enter a name" variant="outlined" onKeyPress={(event) => submitHandler(event)}/>
+        {/* <TextField id="name-textfield" label="Enter a name" variant="outlined" onKeyPress={(event) => submitHandler(event)}/> */}
+        <TextField 
+          id="name-textfield" 
+          label="Enter a name"
+          variant="outlined" 
+          value={inputField}
+          onChange={event => 
+            changeHandler(event)
+          }
+          onKeyDown= {event =>
+            submitHandler(event)
+          }
+          />
           <p>
-            <Button variant="contained" type="button" color="primary" onClick={() => randomizePairsHandler(candidates)}>
+            <Button variant="contained" type="button" color="primary" onClick={() => randomCandidate(candidates)}>
               Pair!
             </Button>
           </p>
