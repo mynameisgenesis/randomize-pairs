@@ -6,7 +6,7 @@ const Pair = (props) => {
         <Card>
             <Card.Content>
                 <Typography>
-                    {props.candidates}
+                    {props.candidate}
                 </Typography>
             </Card.Content>
         </Card>
