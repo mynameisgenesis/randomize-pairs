@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Container, TextField, Button} from '@material-ui/core';
+import Pair from './Pairs/Pair';
 import './App.css';
 
 function App() {
@@ -15,39 +16,37 @@ function App() {
     }
   }
 
-  // const randomizeCandidate = () => {
-  //   setRandomCandidate(candidates[Math.floor(Math.random()*candidates.length)]);
-  // }
-
   const getFirstCandidate = () => {
     let modifiedCandidates = candidates;
     const firstCandidate = modifiedCandidates[Math.floor(Math.random()*modifiedCandidates.length)];
-    console.log('First candidate: ' + firstCandidate);
     const index = candidates.indexOf(firstCandidate);
     if(index !== -1){
       modifiedCandidates.splice(index, 1);
-      setCandidates(modifiedCandidates)
-      console.log(candidates);
+      setCandidates(modifiedCandidates);
     }
     return firstCandidate;
   }
 
   const getSecondCandidate = () => {
     let modifiedCandidates = candidates;
-    console.log(modifiedCandidates);
-    const secondCandidate = modifiedCandidates[Math.floor(Math.random()*modifiedCandidates.length)];;
-    console.log('Second candidate: ' + secondCandidate);
+    const secondCandidate = modifiedCandidates[Math.floor(Math.random()*modifiedCandidates.length)];
     const index = candidates.indexOf(secondCandidate);
     if(index !== -1){
       modifiedCandidates.splice(index, 1);
-      setCandidates(modifiedCandidates)
-      console.log(candidates);
+      setCandidates(modifiedCandidates);
     } 
     return secondCandidate;
   }
 
   const pairCandidates = () => {
-
+    let half = candidates.length / 2;
+    let pair = [];
+    while (half > 0) {
+      half -= 1;
+      pair = [getFirstCandidate(), getSecondCandidate()]; 
+      console.log('This is a pair: ' + pair);
+      //return pair;
+    }
   }
 
   const changeHandler = (event) => {
@@ -56,11 +55,8 @@ function App() {
   }
 
   useEffect(() => {
-      //setCandidates(candidates);
-      console.log(candidates)
       setRandomCandidate(candidates[Math.floor(Math.random()*candidates.length)])
-  }, [candidates]);
-
+  }, [candidates, randomCandidate]);
 
   return (
     <Container>
@@ -84,7 +80,6 @@ function App() {
               type="button" 
               color="primary" 
               onClick={() => {
-                //randomizeCandidate(candidates);
                 pairCandidates(candidates, randomCandidate);
               }}>
               Pair!
@@ -96,9 +91,7 @@ function App() {
               return <p key={index}>{candidate}</p>
             }) : null
           }
-          
-          {/* <h3>{randomCandidate}</h3> */}
-
+        
       </div>
     </Container>
 
