@@ -7,6 +7,8 @@ function App() {
   const [candidates, setCandidates] = useState([]);
   const [randomCandidate, setRandomCandidate] = useState('t');
   const [inputField, setInputField] = useState('');
+  const [pairs, setPairs] = useState();
+  const [showPairs, setShowPairs] = useState(false);
 
   const submitHandler = (event) => {
     event.persist();
@@ -43,16 +45,12 @@ function App() {
     let pair = [];
     while (half > 0) {
       half -= 1;
-      pair = [getFirstCandidate(), getSecondCandidate()]; 
+      pair = [getFirstCandidate(), getSecondCandidate()];
       console.log('This is a pair: ' + pair);
-      return pair;
+      setPairs(pair);
     }
   }
-
-  const displayPairs = () => {
-    let half = candidates.length / 2;
-  }
-
+  
   const changeHandler = (event) => {
     event.persist();
     setInputField(event.target.value);
@@ -61,6 +59,7 @@ function App() {
   useEffect(() => {
       setRandomCandidate(candidates[Math.floor(Math.random()*candidates.length)])
   }, [candidates, randomCandidate]);
+
 
   return (
     <Container>
@@ -95,10 +94,11 @@ function App() {
               return <p key={index}>{candidate}</p>
             }) : null
           }
+          
+          {showPairs}
 
       </div>
     </Container>
-
   );
 }
 
