@@ -45,8 +45,12 @@ function App() {
       half -= 1;
       pair = [getFirstCandidate(), getSecondCandidate()]; 
       console.log('This is a pair: ' + pair);
-      //return pair;
+      return pair;
     }
+  }
+
+  const displayPairs = () => {
+    let half = candidates.length / 2;
   }
 
   const changeHandler = (event) => {
@@ -61,7 +65,7 @@ function App() {
   return (
     <Container>
       <div className="App">
-        <h1>Random Pair</h1>
+        <h1>Random Pairs</h1>
         <TextField 
           id="name-textfield" 
           label="Enter a name"
@@ -91,7 +95,7 @@ function App() {
               return <p key={index}>{candidate}</p>
             }) : null
           }
-        
+
       </div>
     </Container>
 
