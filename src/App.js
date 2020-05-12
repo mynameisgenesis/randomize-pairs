@@ -95,7 +95,7 @@ function App() {
             }) : null
           }
           
-          {showPairs}
+          {pairs}
 
       </div>
     </Container>
